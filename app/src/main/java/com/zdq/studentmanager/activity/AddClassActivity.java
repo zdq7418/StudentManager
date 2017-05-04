@@ -132,23 +132,23 @@ public class AddClassActivity extends AppCompatActivity {
                             });
                 }else{
                     OkHttpUtils
-                            .post()
-                            .url(InitConfig.SERVICE+InitConfig.ADDCLASS)
-                            .addParams("classGson", JsonTools.createJsonString(classFrom))
-                            .build()
-                            .execute(new StringCallback()
+                                    .post()
+                                    .url(InitConfig.SERVICE+InitConfig.ADDCLASS)
+                                .addParams("classGson", JsonTools.createJsonString(classFrom))
+                                    .build()
+                                .execute(new StringCallback()
                             {
                                 @Override
                                 public void onError(Call call, Exception e, int id) {
 
-                                }
+                            }
 
                                 @Override
                                 public void onResponse(String response, int id) {
-                                    if ("1".equals(response)){
-                                        Snackbar.make(save, "保存成功!", Snackbar.LENGTH_LONG).show();
-                                    }
+                                if ("1".equals(response)){
+                                    Snackbar.make(save, "保存成功!", Snackbar.LENGTH_LONG).show();
                                 }
+                            }
                             });
                 }
 

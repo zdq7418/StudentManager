@@ -24,6 +24,8 @@ import com.zdq.studentmanager.util.JsonTools;
 
 import java.util.List;
 
+import me.shaohui.bottomdialog.BottomDialog;
+
 /**
  * Created by ThundeRobot on 2017/4/14.
  */
@@ -38,7 +40,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
         if (mContext==null){
             mContext=parent.getContext();
         }
-        View view= LayoutInflater.from(mContext).inflate(R.layout.class_item,parent,false);
+        final View view= LayoutInflater.from(mContext).inflate(R.layout.class_item,parent,false);
         final ViewHolder holder=new ViewHolder(view);
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +52,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
                 mContext.startActivity(intent);
             }
         });
+
         return holder;
     }
 

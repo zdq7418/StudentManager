@@ -2,6 +2,7 @@ package com.zdq.studentmanager.activity;
 
 import android.app.SearchManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
@@ -26,6 +27,8 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.hss01248.dialog.StyledDialog;
+import com.hss01248.dialog.interfaces.MyDialogListener;
 import com.zdq.studentmanager.R;
 import com.zdq.studentmanager.activity.fragment.ClassFragment;
 import com.zdq.studentmanager.activity.fragment.StudentFragment;
@@ -53,7 +56,7 @@ public class Main2Activity extends AppCompatActivity
     private StudentFragment studentFragment;
 
     private ClassFragment classFragment;
-
+    private SharedPreferences preferences;
     private Toolbar toolbar;
 
     private List<TeacherForm> teacherForms;
@@ -360,6 +363,30 @@ public class Main2Activity extends AppCompatActivity
 
         } else if (id == R.id.menu_setting) {
             InitConfig.fragmentName="menu_setting";
+            StyledDialog.buildIosAlert( "提示", "确认注销吗？",  new MyDialogListener() {
+                @Override
+                public void onFirst() {
+                    preferences = getSharedPreferences("student", MODE_PRIVATE);
+                    if(preferences.getString("loginFlag", "").equals("1")){
+                        Intent intent=new Intent();
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("loginFlag", "0");
+                        editor.putString("roleId","");
+                        editor.putString("account","");
+                        InitConfig.accout="";
+                        InitConfig.roleId="";
+                        editor.commit();
+                        intent.setClass(Main2Activity.this,LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                        return;
+                    }
+                }
+
+                @Override
+                public void onSecond() {
+                }
+            }).setBtnText("确认","取消").show();
 
         }
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);

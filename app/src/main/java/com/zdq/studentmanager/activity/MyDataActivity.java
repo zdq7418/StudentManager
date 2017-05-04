@@ -159,6 +159,7 @@ public class MyDataActivity extends AppCompatActivity implements View.OnClickLis
                             mydataTxtName.setText(studentForm.getStudentName());
                             mydataTxtTel.setText(studentForm.getStudentTel());
                             mydataTxtAddr.setText(studentForm.getStudentAdd());
+                            mydataTxtSex.setText("1".equals(studentForm.getStudentSex())?"男":"女");
                             mydataTxtBro.setText(DateUtil.dateFormat(studentForm.getStudentBir()));
                             if (studentForm.getStudentUrlimage()!=null){
                                 OkHttpUtils
@@ -252,7 +253,7 @@ public class MyDataActivity extends AppCompatActivity implements View.OnClickLis
         }else if (id==R.id.mydataLLSex){
 
             viewName=R.id.mydataTxtSex;
-            bottomDialog= BottomDialog.create(getSupportFragmentManager())
+            /*bottomDialog= BottomDialog.create(getSupportFragmentManager())
                     .setViewListener(new BottomDialog.ViewListener() {
                         @Override
                         public void bindView(View v) {
@@ -260,7 +261,20 @@ public class MyDataActivity extends AppCompatActivity implements View.OnClickLis
                         }
                     })
                     .setLayoutRes(R.layout.sex_layout);      // dialog layout
-            bottomDialog.show();
+            bottomDialog.show();*/
+            String[] words2 = new String[]{"男","女"};
+            StyledDialog.buildMdSingleChoose("性别", 2, words2,  new MyItemDialogListener() {
+                @Override
+                public void onItemClick(CharSequence text, int position) {
+                    if ("男".equals(text)){
+                        mydataTxtSex.setText("男");
+                        studentForm.setStudentSex("1");
+                    }else{
+                        mydataTxtSex.setText("女");
+                        studentForm.setStudentSex("0");
+                    }
+                }
+            }).show();
 
         }else if (id==R.id.mydatallname){
             viewName=R.id.mydataTxtName;
