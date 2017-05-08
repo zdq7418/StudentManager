@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -12,6 +13,26 @@
           android:id="@+id/recycleview"
           android:layout_width="match_parent"
           android:layout_height="match_parent"></me.leefeng.lfrecyclerview.LFRecyclerView>
+      <cc.trity.floatingactionbutton.FloatingActionsMenu
+          android:id="@+id/fab_meau"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          fab:fab_addButtonColorNormal="@color/theme_color"
+          fab:fab_addButtonColorPressed="@color/fab_pressed_color"
+          fab:fab_addButtonPlusIconColor="@color/white"
+          fab:fab_labelStyle="@style/fab_labels_style"
+          android:layout_gravity="bottom|end"
+          android:layout_margin="16dp"
+          >
 
+         <cc.trity.floatingactionbutton.FloatingActionButton
+             android:id="@+id/fab_action_a"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             fab:fab_colorNormal="@color/white"
+             fab:fab_title="添加"
+             fab:fab_size="mini"
+             />
+      </cc.trity.floatingactionbutton.FloatingActionsMenu>
    </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>

@@ -147,10 +147,7 @@ public class MyDataActivity extends AppCompatActivity implements View.OnClickLis
                                 classFrom=gson.fromJson(classF,ClassFrom.class);
                             }
                             if (student!=null){
-                                studentForms=gson.fromJson(student,new TypeToken<List<StudentForm>>(){}.getType());
-                                studentForm=studentForms.get(0);
-                            }else{
-                                studentForm=new StudentForm();
+                                studentForm=gson.fromJson(student,StudentForm.class);
                             }
                             if (classFrom!=null){
                                 mydataTxtClas.setText(classFrom.getClassName());

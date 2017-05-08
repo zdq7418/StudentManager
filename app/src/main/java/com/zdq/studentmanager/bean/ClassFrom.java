@@ -71,4 +71,8 @@ public class ClassFrom implements java.io.Serializable {
 		this.teacherId = teacherId;
 	}
 
+	@Override
+	public String toString() {
+		return className;
+	}
 }

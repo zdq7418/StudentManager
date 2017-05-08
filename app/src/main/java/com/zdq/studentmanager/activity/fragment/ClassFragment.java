@@ -1,12 +1,9 @@
 package com.zdq.studentmanager.activity.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +15,10 @@ import com.google.gson.reflect.TypeToken;
 import com.hss01248.dialog.StyledDialog;
 import com.hss01248.dialog.interfaces.MyDialogListener;
 import com.hss01248.dialog.interfaces.MyItemDialogListener;
-import com.yanzhenjie.album.Album;
 import com.zdq.studentmanager.R;
-import com.zdq.studentmanager.activity.MyDataActivity;
+import com.zdq.studentmanager.activity.add.AddClassActivity;
 import com.zdq.studentmanager.adapter.ClassAdapter;
-import com.zdq.studentmanager.adapter.StudentAdapter;
 import com.zdq.studentmanager.bean.ClassFrom;
-import com.zdq.studentmanager.bean.StudentForm;
 import com.zdq.studentmanager.util.InitConfig;
 import com.zdq.studentmanager.util.JsonTools;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -33,9 +27,9 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.util.ArrayList;
 import java.util.List;
 
+import cc.trity.floatingactionbutton.FloatingActionButton;
 import me.leefeng.lfrecyclerview.LFRecyclerView;
 import me.leefeng.lfrecyclerview.OnItemClickListener;
-import me.shaohui.bottomdialog.BottomDialog;
 import okhttp3.Call;
 
 /**
@@ -55,7 +49,7 @@ public class ClassFragment extends Fragment implements LFRecyclerView.LFRecycler
         key=bundle.getString("key");
         recyclerView= (LFRecyclerView) view.findViewById(R.id.recycleview);
         recyclerView.setRefresh(false);
-        recyclerView.setLoadMore(true);//设置为可上拉加载,默认false
+        recyclerView.setLoadMore(false);//设置为可上拉加载,默认false
         recyclerView.setOnItemClickListener(this);// 条目点击,点击和长按监听
         recyclerView.setLFRecyclerViewListener(this);
         recyclerView.setNoDateShow();
@@ -85,6 +79,14 @@ public class ClassFragment extends Fragment implements LFRecyclerView.LFRecycler
 
                     }
                 });
+        final FloatingActionButton fab= (FloatingActionButton) view.findViewById(R.id.fab_action_a);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AddClassActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
@@ -99,7 +101,10 @@ public class ClassFragment extends Fragment implements LFRecyclerView.LFRecycler
 
     @Override
     public void onClick(int position) {
-
+        ClassFrom fruit=fruitList.get(position);
+        Intent intent=new Intent(getActivity(), AddClassActivity.class);
+        intent.putExtra("data", JsonTools.createJsonString(fruit));
+        startActivity(intent);
     }
 
     @Override

@@ -30,6 +30,7 @@ import com.google.gson.reflect.TypeToken;
 import com.hss01248.dialog.StyledDialog;
 import com.hss01248.dialog.interfaces.MyDialogListener;
 import com.zdq.studentmanager.R;
+import com.zdq.studentmanager.activity.fragment.ChengjiGLFragment;
 import com.zdq.studentmanager.activity.fragment.ClassFragment;
 import com.zdq.studentmanager.activity.fragment.StudentFragment;
 import com.zdq.studentmanager.bean.ClassFrom;
@@ -63,8 +64,8 @@ public class Main2Activity extends AppCompatActivity
     private List<StudentForm> studentForms;
     private TeacherForm teacherForm;
     private StudentForm studentForm;
+    private ChengjiGLFragment chengjiGLFragment;
     private  CircleImageView logo;
-    private SwipeRefreshLayout swipeRefreshLayout;
     private TextView name,phone;
 
     @Override
@@ -73,23 +74,7 @@ public class Main2Activity extends AppCompatActivity
         setContentView(R.layout.activity_main2);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        final FloatingActionButton fab= (FloatingActionButton) findViewById(R.id.fab_action_a);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if ("menu_studentMa".equals(InitConfig.fragmentName)){
-
-                }else if ("menu_classMa".equals(InitConfig.fragmentName)){
-                    Intent intent=new Intent(Main2Activity.this,AddClassActivity.class);
-                    startActivity(intent);
-                }else if ("menu_studentsorec".equals(InitConfig.fragmentName)){
-
-                }else if ("menu_studentWeiji".equals(InitConfig.fragmentName)){
-
-                }
-
-            }
-        });
+        initMydata();
         studentFragment=new StudentFragment();
         toolbar.setTitle("学生信息管理");
         InitConfig.fragmentName="menu_studentMa";
@@ -132,14 +117,7 @@ public class Main2Activity extends AppCompatActivity
                 }
             }
         }
-        swipeRefreshLayout= (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refreshFragment("");
-            }
-        });
+
 
     }
 
@@ -169,7 +147,6 @@ public class Main2Activity extends AppCompatActivity
         }else if ("menu_studentWeiji".equals(InitConfig.fragmentName)){
 
         }
-        swipeRefreshLayout.setRefreshing(false);
     }
 
     private void initMydata(){
@@ -226,9 +203,7 @@ public class Main2Activity extends AppCompatActivity
                             String classF=  map.get("class");
 
                             if (student!=null){
-                                studentForms=gson.fromJson(student,new TypeToken<List<StudentForm>>(){}.getType());
-                                studentForm=studentForms.get(0);
-
+                                studentForm=gson.fromJson(student,StudentForm.class);
                             }else{
                                 studentForm=new StudentForm();
                             }
@@ -289,6 +264,10 @@ public class Main2Activity extends AppCompatActivity
             // 输入后点击回车改变文本
             @Override
             public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent();
+                intent.setAction(InitConfig.fragmentName);
+                intent.putExtra("key",query);
+                sendBroadcast(intent);
                 refreshFragment(query);
                 return false;
             }
@@ -356,13 +335,16 @@ public class Main2Activity extends AppCompatActivity
         } else if (id == R.id.menu_studentsorec) {
             toolbar.setTitle("学生成绩管理");
             InitConfig.fragmentName="menu_studentsorec";
-
+            chengjiGLFragment=new ChengjiGLFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.content, chengjiGLFragment)
+                    .commit();
         } else if (id == R.id.menu_studentWeiji) {
             toolbar.setTitle("违纪信息管理");
             InitConfig.fragmentName="menu_studentWeiji";
 
         } else if (id == R.id.menu_setting) {
-            InitConfig.fragmentName="menu_setting";
             StyledDialog.buildIosAlert( "提示", "确认注销吗？",  new MyDialogListener() {
                 @Override
                 public void onFirst() {

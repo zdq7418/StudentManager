@@ -1,15 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/spp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/recycler_view"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 />
+    <cc.trity.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/fab_meau"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        fab:fab_addButtonColorNormal="@color/theme_color"
+        fab:fab_addButtonColorPressed="@color/fab_pressed_color"
+        fab:fab_addButtonPlusIconColor="@color/white"
+        fab:fab_labelStyle="@style/fab_labels_style"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        >
 
-</android.support.design.widget.CoordinatorLayout>
+        <cc.trity.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_action_a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_title="添加"
+            fab:fab_size="mini"
+            />
+    </cc.trity.floatingactionbutton.FloatingActionsMenu>
+    </android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

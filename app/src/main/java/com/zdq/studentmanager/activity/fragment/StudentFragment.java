@@ -1,33 +1,28 @@
 package com.zdq.studentmanager.activity.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.zdq.studentmanager.R;
-import com.zdq.studentmanager.adapter.FruitAdapter;
+import com.zdq.studentmanager.activity.add.AddStudentActivity;
 import com.zdq.studentmanager.adapter.StudentAdapter;
-import com.zdq.studentmanager.bean.Fruit;
 import com.zdq.studentmanager.bean.StudentForm;
-import com.zdq.studentmanager.bean.TeacherForm;
 import com.zdq.studentmanager.util.InitConfig;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import cc.trity.floatingactionbutton.FloatingActionButton;
 import okhttp3.Call;
@@ -73,7 +68,14 @@ public class StudentFragment extends Fragment {
                         recyclerView.setAdapter(fruitAdapter);
                     }
                 });
-
+        final FloatingActionButton fab= (FloatingActionButton) view.findViewById(R.id.fab_action_a);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AddStudentActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 

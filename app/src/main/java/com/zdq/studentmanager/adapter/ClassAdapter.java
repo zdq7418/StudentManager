@@ -1,30 +1,17 @@
 package com.zdq.studentmanager.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.zdq.studentmanager.R;
-import com.zdq.studentmanager.activity.AddClassActivity;
-import com.zdq.studentmanager.activity.FruitActivity;
-import com.zdq.studentmanager.activity.fragment.ClassFragment;
 import com.zdq.studentmanager.bean.ClassFrom;
-import com.zdq.studentmanager.bean.StudentForm;
-import com.zdq.studentmanager.util.InitConfig;
-import com.zdq.studentmanager.util.JsonTools;
 
 import java.util.List;
-
-import me.shaohui.bottomdialog.BottomDialog;
 
 /**
  * Created by ThundeRobot on 2017/4/14.
@@ -42,16 +29,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
         }
         final View view= LayoutInflater.from(mContext).inflate(R.layout.class_item,parent,false);
         final ViewHolder holder=new ViewHolder(view);
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int position=holder.getAdapterPosition();
-                ClassFrom fruit=mFrultList.get(position);
-                Intent intent=new Intent(mContext, AddClassActivity.class);
-                intent.putExtra("data", JsonTools.createJsonString(fruit));
-                mContext.startActivity(intent);
-            }
-        });
+
 
         return holder;
     }

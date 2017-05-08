@@ -1,4 +1,4 @@
-package com.zdq.studentmanager.activity;
+package com.zdq.studentmanager.activity.add;
 
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
@@ -18,7 +18,6 @@ import com.google.gson.reflect.TypeToken;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.zdq.studentmanager.R;
 import com.zdq.studentmanager.bean.ClassFrom;
-import com.zdq.studentmanager.bean.StudentForm;
 import com.zdq.studentmanager.bean.TeacherForm;
 import com.zdq.studentmanager.util.InitConfig;
 import com.zdq.studentmanager.util.JsonTools;
