@@ -145,4 +145,8 @@ public class StudentForm implements java.io.Serializable {
 		this.studentUrlimage = studentUrlimage;
 	}
 
+	@Override
+	public String toString() {
+		return studentName;
+	}
 }

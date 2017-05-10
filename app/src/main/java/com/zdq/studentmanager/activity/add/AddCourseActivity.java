@@ -24,7 +24,7 @@ import okhttp3.Call;
 
 public class AddCourseActivity extends AppCompatActivity {
     private EditText kechengname;
-    private Button save;
+    private Button save,addtest;
     private CourseForm courseForm;
     private String data;
     private Toolbar toolbar;
@@ -36,6 +36,7 @@ public class AddCourseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_course);
         kechengname= (EditText) findViewById(R.id.kechengname);
         save= (Button) findViewById(R.id.save);
+        addtest= (Button) findViewById(R.id.addTest);
         toolbar= (Toolbar) findViewById(R.id.mydata_toolbar);
         title= (TextView) findViewById(R.id.title);
         toolbar.setTitle("");
@@ -87,6 +88,14 @@ public class AddCourseActivity extends AppCompatActivity {
                         }
                     }
                 });
+            }
+        });
+        addtest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intenti=new Intent(AddCourseActivity.this,TestActivity.class);
+                intenti.putExtra("data",JsonTools.createJsonString(courseForm));
+                startActivity(intenti);
             }
         });
     }

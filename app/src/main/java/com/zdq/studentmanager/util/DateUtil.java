@@ -66,6 +66,18 @@ public class DateUtil {
 		return now;
 	}
 
+
+	public static boolean isDouble(String str)
+	{
+		try
+		{
+			Double.parseDouble(str);
+			return true;
+		}
+		catch(NumberFormatException ex){}
+		return false;
+	}
+
 	/**
 	 * 根据格式获取当前时间的字符串
 	 * 

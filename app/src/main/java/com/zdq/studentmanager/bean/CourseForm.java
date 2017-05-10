@@ -50,4 +50,8 @@ public class CourseForm implements java.io.Serializable {
 		this.courseRem = courseRem;
 	}
 
+	@Override
+	public String toString() {
+		return courseName;
+	}
 }

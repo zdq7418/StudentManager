@@ -9,13 +9,11 @@ public class ScoreForm implements java.io.Serializable {
 	// Fields
 
 	private Integer scoreId;
-	private String scoreNo;
-	private String scorePer;
-	private String scoreCls;
-	private String scoreStu;
-	private String scoreCou;
+	private Integer scoreCls;
 	private Double scoreSco;
 	private String studentNo;
+	private Integer testId;
+	private Integer studentId;
 
 	// Constructors
 
@@ -24,15 +22,13 @@ public class ScoreForm implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public ScoreForm(String scoreNo, String scorePer, String scoreCls,
-			String scoreStu, String scoreCou, Double scoreSco, String studentNo) {
-		this.scoreNo = scoreNo;
-		this.scorePer = scorePer;
+	public ScoreForm(Integer scoreCls, Double scoreSco, String studentNo,
+			Integer testId, Integer studentId) {
 		this.scoreCls = scoreCls;
-		this.scoreStu = scoreStu;
-		this.scoreCou = scoreCou;
 		this.scoreSco = scoreSco;
 		this.studentNo = studentNo;
+		this.testId = testId;
+		this.studentId = studentId;
 	}
 
 	// Property accessors
@@ -45,44 +41,12 @@ public class ScoreForm implements java.io.Serializable {
 		this.scoreId = scoreId;
 	}
 
-	public String getScoreNo() {
-		return this.scoreNo;
-	}
-
-	public void setScoreNo(String scoreNo) {
-		this.scoreNo = scoreNo;
-	}
-
-	public String getScorePer() {
-		return this.scorePer;
-	}
-
-	public void setScorePer(String scorePer) {
-		this.scorePer = scorePer;
-	}
-
-	public String getScoreCls() {
+	public Integer getScoreCls() {
 		return this.scoreCls;
 	}
 
-	public void setScoreCls(String scoreCls) {
+	public void setScoreCls(Integer scoreCls) {
 		this.scoreCls = scoreCls;
-	}
-
-	public String getScoreStu() {
-		return this.scoreStu;
-	}
-
-	public void setScoreStu(String scoreStu) {
-		this.scoreStu = scoreStu;
-	}
-
-	public String getScoreCou() {
-		return this.scoreCou;
-	}
-
-	public void setScoreCou(String scoreCou) {
-		this.scoreCou = scoreCou;
 	}
 
 	public Double getScoreSco() {
@@ -99,6 +63,22 @@ public class ScoreForm implements java.io.Serializable {
 
 	public void setStudentNo(String studentNo) {
 		this.studentNo = studentNo;
+	}
+
+	public Integer getTestId() {
+		return this.testId;
+	}
+
+	public void setTestId(Integer testId) {
+		this.testId = testId;
+	}
+
+	public Integer getStudentId() {
+		return this.studentId;
+	}
+
+	public void setStudentId(Integer studentId) {
+		this.studentId = studentId;
 	}
 
 }

@@ -1,0 +1,44 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto">
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/kecneh_swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:background="#fff"
+                android:id="@+id/kecheng_recycleview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+        </android.support.design.widget.CoordinatorLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+    <cc.trity.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/fab_meau"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        fab:fab_addButtonColorNormal="@color/theme_color"
+        fab:fab_addButtonColorPressed="@color/fab_pressed_color"
+        fab:fab_addButtonPlusIconColor="@color/white"
+        fab:fab_labelStyle="@style/fab_labels_style"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        >
+
+        <cc.trity.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_action_a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_title="添加"
+            fab:fab_size="mini"
+            />
+    </cc.trity.floatingactionbutton.FloatingActionsMenu>
+</android.support.design.widget.CoordinatorLayout>
