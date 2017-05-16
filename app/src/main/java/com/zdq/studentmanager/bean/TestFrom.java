@@ -73,4 +73,8 @@ public class TestFrom implements java.io.Serializable {
 		this.testName = testName;
 	}
 
+	@Override
+	public String toString() {
+		return testName;
+	}
 }

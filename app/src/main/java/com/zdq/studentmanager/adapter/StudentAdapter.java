@@ -115,7 +115,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
         StudentForm fruit=mFrultList.get(position);
         holder.fruitName.setText(fruit.getStudentName());
         if (fruit.getStudentUrlimage()!=null){
-            Glide.with(mContext).load(InitConfig.SERVICE+fruit.getStudentUrlimage()).into(holder.fruitImage);
+            Glide.with(mContext).load(InitConfig.IMAGESERVICE+fruit.getStudentUrlimage()).into(holder.fruitImage);
         }
 
     }

@@ -1,5 +1,6 @@
 package com.zdq.studentmanager.activity.add;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
+import com.hss01248.dialog.StyledDialog;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.zdq.studentmanager.R;
 import com.zdq.studentmanager.bean.ClassFrom;
@@ -42,6 +44,7 @@ public class AddChengjiActivity extends AppCompatActivity {
     private List<StudentForm> studentForms=new ArrayList<>();
     private TestFrom testFrom;
     private ScoreForm scoreForm;
+    private Dialog styledDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +108,7 @@ public class AddChengjiActivity extends AppCompatActivity {
                     return;
                 }
                 scoreForm.setScoreSco(Double.valueOf(chengji.getText().toString()));
+                styledDialog=StyledDialog.buildLoading( "加载中...").setActivity(AddChengjiActivity.this).show();
                 OkHttpUtils.post().url(InitConfig.SERVICE+InitConfig.SAVESCORE).addParams("scoreGson", JsonTools.createJsonString(scoreForm)).build().execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
@@ -113,13 +117,15 @@ public class AddChengjiActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
+                        styledDialog.dismiss();
                         if ("1".equals(response)){
                             Snackbar.make(save,"添加成功",Snackbar.LENGTH_LONG).show();
                             chengji.setText("");
                             scoreForm.setScoreSco(null);
                         }else{
-                            Snackbar.make(save,"添加失败",Snackbar.LENGTH_LONG).show();
+                            Snackbar.make(save,"该学生成绩已添加",Snackbar.LENGTH_LONG).show();
                         }
+
                     }
                 });
             }

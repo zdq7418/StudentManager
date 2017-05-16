@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -37,37 +38,23 @@ public class StudentFragment extends Fragment {
 
     private List<StudentForm> fruitList=new ArrayList<>();
     private StudentAdapter fruitAdapter;
+    private SwipeRefreshLayout students;
     String key="";
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view=inflater.inflate(R.layout.student_fragment, container, false);
+        students= (SwipeRefreshLayout) view.findViewById(R.id.student_swipe_refresh);
+
+
         Bundle bundle = getArguments();
         key=bundle.getString("key");
-        OkHttpUtils
-                .post()
-                .url(InitConfig.SERVICE+InitConfig.FINDALLSTU)
-                .addParams("serachkey",key)
-                .build()
-                .execute(new StringCallback()
-                {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        fruitList.clear();
-                        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-                        fruitList=gson.fromJson(response,new TypeToken<List<StudentForm>>(){}.getType());
-                        final RecyclerView recyclerView= (RecyclerView) view.findViewById(R.id.recycler_view);
-                        GridLayoutManager layoutManager=new GridLayoutManager(getActivity(),2);
-                        recyclerView.setLayoutManager(layoutManager);
-                        fruitAdapter=new StudentAdapter(fruitList);
-                        recyclerView.setAdapter(fruitAdapter);
-                    }
-                });
+        initData(key);
+        final RecyclerView recyclerView= (RecyclerView) view.findViewById(R.id.recycler_view);
+        GridLayoutManager layoutManager=new GridLayoutManager(getActivity(),2);
+        recyclerView.setLayoutManager(layoutManager);
+        fruitAdapter=new StudentAdapter(fruitList);
+        recyclerView.setAdapter(fruitAdapter);
         final FloatingActionButton fab= (FloatingActionButton) view.findViewById(R.id.fab_action_a);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,8 +63,40 @@ public class StudentFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        students.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initData("");
+                students.setRefreshing(false);
+            }
+        });
         return view;
     }
+private void initData(String key){
+    OkHttpUtils
+            .post()
+            .url(InitConfig.SERVICE+InitConfig.FINDALLSTU)
+            .addParams("serachkey",key)
+            .build()
+            .execute(new StringCallback()
+            {
+                @Override
+                public void onError(Call call, Exception e, int id) {
 
+                }
+
+                @Override
+                public void onResponse(String response, int id) {
+
+                    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+                    List<StudentForm> fstudentList=gson.fromJson(response,new TypeToken<List<StudentForm>>(){}.getType());
+                    fruitList.clear();
+                    for (StudentForm s:fstudentList){
+                        fruitList.add(s);
+                    }
+                    fruitAdapter.notifyDataSetChanged();
+                }
+            });
+}
 
 }

@@ -175,7 +175,7 @@ public class Main2Activity extends AppCompatActivity
                                 if (teacherForm.getTeacherUrlimage()!=null){
                                     OkHttpUtils
                                             .post()//
-                                            .url(InitConfig.SERVICE+teacherForm.getTeacherUrlimage())//
+                                            .url(InitConfig.IMAGESERVICE+teacherForm.getTeacherUrlimage())//
                                             .build()//
                                             .execute(new BitmapCallback()
                                             {
@@ -212,7 +212,7 @@ public class Main2Activity extends AppCompatActivity
                             if (studentForm.getStudentUrlimage()!=null){
                                 OkHttpUtils
                                         .post()//
-                                        .url(InitConfig.SERVICE+studentForm.getStudentUrlimage())//
+                                        .url(InitConfig.IMAGESERVICE+studentForm.getStudentUrlimage())//
                                         .build()//
                                         .execute(new BitmapCallback()
                                         {

@@ -101,7 +101,7 @@ public class KaoshiFragment extends Fragment {
                                     OkHttpUtils
                                             .post()
                                             .url(InitConfig.SERVICE+InitConfig.DELTEST)
-                                            .addParams("courseGson", JsonTools.createJsonString(list.get(position)))
+                                            .addParams("testGson", JsonTools.createJsonString(list.get(position)))
                                             .build()
                                             .execute(new StringCallback()
                                             {
@@ -199,6 +199,10 @@ spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
                     @Override
                     public void onResponse(String response, int id) {
                         courseFormList=InitConfig.gson.fromJson(response,new TypeToken<List<CourseForm>>(){}.getType());
+                        CourseForm c=new CourseForm();
+                        c.setCourseName("请选择");
+                        c.setCourseId(0);
+                        courseFormList.add(0,c);
                         spinner.setItems(courseFormList);
                     }
 

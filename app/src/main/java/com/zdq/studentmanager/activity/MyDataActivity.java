@@ -122,7 +122,7 @@ public class MyDataActivity extends AppCompatActivity implements View.OnClickLis
                             if (teacherForm.getTeacherUrlimage()!=null){
                                 OkHttpUtils
                                         .get()//
-                                        .url(InitConfig.SERVICE+teacherForm.getTeacherUrlimage())//
+                                        .url(InitConfig.IMAGESERVICE+teacherForm.getTeacherUrlimage())//
                                         .build()//
                                         .execute(new BitmapCallback()
                                         {
@@ -161,7 +161,7 @@ public class MyDataActivity extends AppCompatActivity implements View.OnClickLis
                             if (studentForm.getStudentUrlimage()!=null){
                                 OkHttpUtils
                                         .get()//
-                                        .url(InitConfig.SERVICE+studentForm.getStudentUrlimage())//
+                                        .url(InitConfig.IMAGESERVICE+studentForm.getStudentUrlimage())//
                                         .build()//
                                         .execute(new BitmapCallback()
                                         {
